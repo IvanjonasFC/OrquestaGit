@@ -810,3 +810,25 @@ body { font-weight: 500; }
   --fg-2:#655C50;
   --fg-3:#8B806F;
 }
+
+/* ============================================================
+   AJUSTES FINALES — panel derecho SIN diferenciación + hover sin aclarar
+   ============================================================ */
+/* Panel lateral derecho: exactamente el mismo fondo que el dashboard */
+.side-panel{
+  background: transparent !important;
+  background-image: none !important;
+  border-left: none !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.side-panel .sp-header{ border-bottom: none; }
+
+/* Hover de tarjetas: sin aclarar, sin escala, sin morph (queda quieto y limpio) */
+.card:hover, .glass-panel:hover, .kpi-card:hover, .repo-item:hover{
+  background: var(--card-bg) !important;
+  transform: none !important;
+  border-top-left-radius: 16px !important;
+  border-bottom-right-radius: 16px !important;
+}
