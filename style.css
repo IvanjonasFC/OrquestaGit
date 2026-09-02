@@ -832,3 +832,25 @@ body { font-weight: 500; }
   border-top-left-radius: 16px !important;
   border-bottom-right-radius: 16px !important;
 }
+/* ============================================================
+   BOTONES SECUNDARIOS (tema claro): escalón 3D cálido + borde acorde.
+   Naranja SOLO al pasar el ratón, para no competir con la acción principal.
+   ============================================================ */
+:root[data-theme="light"] .cta.ghost,
+:root[data-theme="light"] .cta.warn{
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-1);
+  box-shadow: 0 .2em 0 0 var(--btn-base, #CDBFA8);
+}
+:root[data-theme="light"] .cta.ghost:hover,
+:root[data-theme="light"] .cta.warn:hover{
+  background: var(--bg-3);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 .3em 0 0 var(--btn-base, #CDBFA8);
+}
+:root[data-theme="light"] .cta.ghost:active,
+:root[data-theme="light"] .cta.warn:active{
+  box-shadow: 0 0 0 0 var(--btn-base, #CDBFA8);
+}
