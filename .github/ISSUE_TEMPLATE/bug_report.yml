@@ -1,0 +1,32 @@
+name: "🐛 Reporte de fallo"
+description: Informa de un comportamiento incorrecto
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: Descripción
+      description: ¿Qué ha pasado? ¿Qué esperabas que pasara?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      placeholder: |
+        1. Ir a ...
+        2. Pulsar en ...
+        3. Ver el error
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Sistema operativo
+      placeholder: "Windows 11"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs de consola (si aplica)

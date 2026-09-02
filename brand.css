@@ -1,0 +1,141 @@
+/* ============================================================
+   FORGE BRAND KIT — fuente única de verdad para TODAS mis apps
+   Marca: negro OLED cálido + acento naranja forge.
+   Tipografía: Space Grotesk (display) · Inter (UI) · JetBrains Mono (datos).
+   Uso: <link rel="stylesheet" href="./brand.css"> ANTES del css de la app.
+   Requiere las fuentes de Google (Space Grotesk / Inter / JetBrains Mono).
+   ============================================================ */
+
+:root {
+  color-scheme: dark;
+  --bg-0:#070708; --bg-1:#0D0D0F; --bg-2:#131315; --bg-3:#1B1B1E; --bg-4:#242428;
+  --border:#202024; --border-strong:#313136; --border-accent:#45454C;
+  --fg-0:#FFFFFF; --fg-1:#ECECEF; --fg-2:#B2B2B8; --fg-3:#7E7E85;
+  --accent:#F0A470; --brand:#F0A470; --accent-dim:#E08A50;
+  --accent-soft:rgba(240,164,112,0.14);
+  --accent-gradient:linear-gradient(135deg,#F4AE7C 0%,#E89055 100%);
+  --accent-glow:rgba(240,164,112,0.40);
+  --good:#4FC29A; --good-soft:rgba(79,194,154,0.14);
+  --warn:#E6B25A; --warn-soft:rgba(230,178,90,0.14);
+  --bad:#E86B6B;  --bad-soft:rgba(232,107,107,0.14);
+  --on-accent:#221503;
+  --btn-base:#050506;            /* base oscura del botón 3D */
+  --font-display:'Space Grotesk',system-ui,sans-serif;
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','Consolas',monospace;
+  --font-size-base:15px; --font-size-sm:13px; --font-size-xs:11.5px; --line-height:1.55;
+  --radius-sm:6px; --radius:10px; --radius-lg:14px; --radius-xl:20px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.4); --shadow-md:0 4px 12px rgba(0,0,0,0.5); --shadow-lg:0 12px 32px rgba(0,0,0,0.6);
+  --t-fast:120ms cubic-bezier(0.16,1,0.3,1); --t-base:200ms cubic-bezier(0.16,1,0.3,1);
+  --glass:linear-gradient(180deg,rgba(12,12,15,0.34) 0%,rgba(7,7,10,0.20) 100%);
+  --hairline:rgba(255,255,255,0.05); --chrome-hover:rgba(255,255,255,0.045);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg-0:#F4F0EA; --bg-1:#FBF8F3; --bg-2:#ECE7DF; --bg-3:#E2DCD2; --bg-4:#D6CFC4;
+  --border:#E4DDD2; --border-strong:#CDC4B7; --border-accent:#B6AB9C;
+  --fg-0:#201A15; --fg-1:#453E37; --fg-2:#6E655C; --fg-3:#9C948A;
+  --accent:#D66C3D; --brand:#D66C3D; --accent-dim:#BC5729;
+  --accent-soft:rgba(214,108,61,0.12); --accent-glow:rgba(214,108,61,0.4);
+  --good:#2E9E74; --warn:#C1861F; --bad:#C94A4A; --on-accent:#FFFFFF;
+  --btn-base:#C9BEB0;
+  --glass:linear-gradient(180deg,rgba(251,248,243,0.82) 0%,rgba(244,240,234,0.6) 100%);
+  --hairline:rgba(70,45,20,0.08); --chrome-hover:rgba(90,55,25,0.05);
+}
+
+/* ─── Botón 3D pulsable (un solo elemento, sin cambiar markup) ─── */
+.btn-3d{
+  position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  height:40px; padding:0 1.2rem; font-family:var(--font-sans); font-size:var(--font-size-sm); font-weight:700;
+  color:var(--on-accent); background:var(--accent); border:none; border-radius:var(--radius); cursor:pointer;
+  box-shadow:0 .22em 0 0 var(--btn-base), inset 0 1px 0 rgba(255,255,255,.22);
+  transform:translateY(-.11em);
+  transition:transform .1s ease, box-shadow .1s ease, filter var(--t-fast);
+}
+.btn-3d:hover{ transform:translateY(-.22em); box-shadow:0 .33em 0 0 var(--btn-base), inset 0 1px 0 rgba(255,255,255,.28); filter:brightness(1.05); }
+.btn-3d:active{ transform:translateY(0); box-shadow:0 0 0 0 var(--btn-base), inset 0 1px 0 rgba(255,255,255,.2); }
+.btn-3d:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.btn-3d:disabled{ opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
+.btn-3d.is-ghost{ background:var(--bg-3); color:var(--fg-1); box-shadow:0 .22em 0 0 #000, inset 0 1px 0 rgba(255,255,255,.06); }
+.btn-3d.is-ghost:hover{ box-shadow:0 .33em 0 0 #000, inset 0 1px 0 rgba(255,255,255,.08); filter:none; background:var(--bg-4); }
+
+/* ─── Barra glass flotante (píldora con desenfoque) ─── */
+.glass-nav{
+  display:inline-flex; align-items:center; gap:.35rem; padding:.5rem .9rem; border-radius:999px;
+  background:var(--glass); border:1px solid var(--hairline);
+  -webkit-backdrop-filter:saturate(1.3) blur(14px); backdrop-filter:saturate(1.3) blur(14px);
+  box-shadow:var(--shadow-lg);
+  transition:box-shadow var(--t-base), background var(--t-base);
+}
+.glass-nav:hover{ box-shadow:0 16px 40px rgba(0,0,0,.6); }
+.glass-nav__btn{
+  display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; padding:0;
+  border:none; border-radius:999px; background:transparent; color:var(--fg-2); cursor:pointer;
+  transition:transform .18s ease, color .18s ease, background .18s ease;
+}
+.glass-nav__btn:hover{ color:var(--fg-0); background:var(--chrome-hover); transform:scale(1.1); }
+.glass-nav__btn:active{ transform:scale(.96); }
+.glass-nav__btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.glass-nav__btn.is-accent{ color:var(--accent); }
+.glass-nav__btn svg{ width:22px; height:22px; }
+
+/* ─── Firma visual: matriz de puntos (coste ~0, decorativa) ─── */
+.dot-matrix{
+  --dot:var(--fg-3);
+  background-image:radial-gradient(var(--dot) 1px, transparent 1.4px);
+  background-size:7px 7px; opacity:.5;
+}
+.dot-matrix.is-accent{ --dot:var(--accent); }
+
+/* ─── Tokens complementarios (superset completo para portar a cualquier app) ─── */
+:root{
+  --border-accent:#45454C;
+  --grid-line:rgba(255,255,255,0.03);
+  --glow-1:rgba(240,168,120,0.14); --glow-2:rgba(236,140,96,0.06);
+  --card-bg:rgba(255,255,255,0.025); --card-bg-hover:rgba(255,255,255,0.045);
+  --card-hover-border:var(--border-strong);
+  --control-bg:rgba(255,255,255,0.045); --control-bg-hover:rgba(255,255,255,0.08);
+}
+:root[data-theme="light"]{
+  --grid-line:rgba(120,68,30,0.06);
+  --glow-1:rgba(214,108,61,0.10); --glow-2:rgba(214,108,61,0.05);
+  --card-bg:rgba(255,255,255,0.55); --card-bg-hover:rgba(255,255,255,0.78);
+  --card-hover-border:var(--border-strong);
+  --control-bg:rgba(80,50,20,0.045); --control-bg-hover:rgba(80,50,20,0.07);
+}
+
+/* ─── Card con morph al hover (Forge, translúcida) ─── */
+.card-morph{
+  transition:border-color .45s cubic-bezier(.075,.82,.165,1),
+             border-radius .5s cubic-bezier(.075,.82,.165,1),
+             transform .5s cubic-bezier(.075,.82,.165,1);
+  will-change:transform,border-radius;
+}
+.card-morph:hover{ border-top-left-radius:34px; border-bottom-right-radius:34px; transform:scale(1.02); }
+
+/* ===== TEMA CLARO PASTEL v2 ===== */
+:root[data-theme="light"]{
+--bg-0:#ECE2D0; --bg-1:#FCF9F3; --bg-2:#E4D9C5; --bg-3:#DACEB8; --bg-4:#CDBFA6;
+  --border:#E2D7C3; --border-strong:#CFC1A9; --border-accent:#BDAD92; --hairline:rgba(90,60,30,.08);
+  --fg-0:#2B2620; --fg-1:#4E463D; --fg-2:#7A7165; --fg-3:#A69B8B;
+  --accent:#E0824F; --brand:#E0824F; --accent-dim:#C8683A; --accent-soft:rgba(224,130,79,.12);
+  --accent-gradient:linear-gradient(135deg,#E99A6C 0%,#E0824F 100%); --accent-glow:rgba(224,130,79,.30);
+  --good:#43AE86; --good-soft:rgba(67,174,134,.14);
+  --warn:#E3BC57; --warn-soft:rgba(227,188,87,.18);
+  --bad:#DC6A64; --bad-soft:rgba(220,106,100,.14);
+  --on-accent:#FFFFFF; --btn-base:#CDBFA8;
+  --grid-line:rgba(120,80,40,.07); --glow-1:rgba(224,130,79,.10); --glow-2:rgba(224,130,79,.05);
+  --glass:linear-gradient(180deg,rgba(255,255,255,.72) 0%,rgba(246,241,235,.55) 100%);
+  --card-bg:rgba(255,255,255,.66); --card-bg-hover:rgba(255,255,255,.85); --card-hover-border:var(--border-strong);
+  --control-bg:rgba(90,60,30,.045); --control-bg-hover:rgba(90,60,30,.07);
+  --shadow-sm:0 1px 2px rgba(80,55,25,.06); --shadow-md:0 4px 14px rgba(80,55,25,.10); --shadow-lg:0 14px 36px rgba(80,55,25,.16);
+}
+
+/* ===== TEMA CLARO v3 ===== */
+:root[data-theme="light"]{
+--bg-0:#F4EEE4; --bg-1:#FBF7F0; --bg-2:#EFE8DC; --bg-3:#E6DED0; --bg-4:#D9CFBE;
+  --border:#EAE2D6; --border-strong:#D7CBB9;
+  --glass:linear-gradient(180deg,rgba(249,244,236,.82) 0%,rgba(244,238,228,.66) 100%);
+  --glow-1:rgba(224,130,79,.055); --glow-2:rgba(224,130,79,.028);
+  --card-bg:rgba(252,248,241,.70); --card-bg-hover:rgba(255,255,255,.88);
+}
