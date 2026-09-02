@@ -60,7 +60,22 @@ def _audit_npm(repo):
         findings = []
         fix_major = False
         vulns = data.get("vulnerabilities", {})
-        if isinstance(vulns, dict):
+        # --- npm v6: esquema antiguo con 'advisories' ---
+        if (not vulns) and isinstance(data.get("advisories"), dict):
+            for adv in data["advisories"].values():
+                sev = adv.get("severity", "")
+                fixed = adv.get("patched_versions", "")
+                findings.append({
+                    "package": adv.get("module_name", ""),
+                    "severity": sev,
+                    "title": adv.get("title", "(sin detalle)"),
+                    "range": adv.get("vulnerable_versions", ""),
+                    "fix": (f"actualizar a {fixed}" if fixed and fixed != "<0.0.0" else "npm audit fix"),
+                    "url": adv.get("url", ""),
+                })
+            findings.sort(key=lambda f: _SEV_ORDER.get(f.get("severity"), 9))
+        # --- npm v7+: esquema 'vulnerabilities' ---
+        if isinstance(vulns, dict) and vulns:
             for pkg, v in vulns.items():
                 sev = v.get("severity", "")
                 rng = v.get("range", "")

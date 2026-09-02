@@ -43,3 +43,9 @@ desktop.ini
 # ---- Basura local (backups, temporales) ----
 Basura/
 *.bak
+
+# ---- Helpers locales de Windows y notas de desarrollo (NO se publican) ----
+# El build esta documentado en el README (npm run tauri build). Los .bat son de conveniencia local.
+*.bat
+ORQUESTA_WORKLOG.md
+app-icon.jpg

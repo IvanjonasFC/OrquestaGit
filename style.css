@@ -795,3 +795,18 @@ body { font-weight: 500; }
   --glow-1:rgba(224,130,79,.055); --glow-2:rgba(224,130,79,.028);
   --card-bg:rgba(252,248,241,.70); --card-bg-hover:rgba(255,255,255,.88);
 }
+
+/* ============================================================
+   BRAND KIT v8 — panel derecho SIN sombra (vista limpia) + tema claro más legible
+   ============================================================ */
+/* Fuera la sombra/velo que dividía la vista al abrir el panel; separación con hairline sutil */
+.side-panel{ box-shadow: none; border-left: 1px solid var(--hairline); }
+/* En tema claro el borde del panel, aún más discreto */
+:root[data-theme="light"] .side-panel{ border-left-color: var(--border); }
+
+/* Tema claro: un punto más de contraste en textos secundarios → se leen mejor */
+:root[data-theme="light"]{
+  --fg-1:#413A31;
+  --fg-2:#655C50;
+  --fg-3:#8B806F;
+}

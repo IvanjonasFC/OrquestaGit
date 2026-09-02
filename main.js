@@ -918,6 +918,14 @@ function renderSecopsList(data) {
       const detail = document.createElement('div');
       detail.style = 'display:none; margin-top:12px; border-top:1px solid var(--hairline); padding-top:12px;';
 
+      // Caché antigua (sin detalle): pista en vez de caja vacía.
+      if (!repo.fix_cmd && (!findings || findings.length === 0)) {
+        const hint = document.createElement('div');
+        hint.style = 'font-size:11.5px; color:var(--fg-2);';
+        hint.textContent = 'Detalle no cargado (auditoría previa a esta versión). Pulsa "Auditar Todos" para ver qué paquetes son y cómo arreglarlos.';
+        detail.appendChild(hint);
+      }
+
       // Cómo actuar
       if (repo.fix_cmd) {
         const rem = document.createElement('div');
