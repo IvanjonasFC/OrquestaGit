@@ -12,6 +12,8 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)](https://www.microsoft.com/windows)
 [![CI](https://github.com/IvanjonasFC/OrquestaGit/actions/workflows/ci.yml/badge.svg)](https://github.com/IvanjonasFC/OrquestaGit/actions/workflows/ci.yml)
 
+<img src="assets/screenshot.png" alt="OrquestaGit" width="880" />
+
 </div>
 
 ---
