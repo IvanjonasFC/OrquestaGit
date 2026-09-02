@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OrquestaGit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./brand.css" />
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<div class="bg"><div class="bg-blob" id="blob"></div></div>
+<div class="grain"></div>
+
+
+
+<div class="app" id="app">
+
+  <!-- ─── Sidebar ─────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="brand" data-tauri-drag-region>
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 9v6"/><path d="M15 18H9"/><path d="M18 15v-2a3 3 0 0 0-3-3H9"/></svg>
+      </span>
+      <span class="brand-text">Orquesta<span class="gr">Git</span></span>
+      <button class="collapse-btn" id="btn-toggle-sidebar" title="Plegar barra" aria-label="Toggle sidebar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform var(--t-fast);">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-section">
+        <div class="nav-section-label" data-i18n="sec_panel">Panel</div>
+        <div class="nav-item active" data-tab="dashboard">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48Zm0,144H32V64H224V192ZM118.92,151.71A8,8,0,0,1,116,162.64a40,40,0,1,1,0-69.28,8,8,0,1,1-8,13.85,24,24,0,1,0,0,41.58A8,8,0,0,1,118.92,151.71Zm80,0A8,8,0,0,1,196,162.64a40,40,0,1,1,0-69.28,8,8,0,1,1-8,13.85,24,24,0,1,0,0,41.58A8,8,0,0,1,198.92,151.71Z"/></svg>
+          <span class="lbl" data-i18n="nav_dashboard">Dashboard</span>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label" data-i18n="sec_tools">Herramientas</div>
+        <div class="nav-item" data-tab="architect">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,82.34l-80-40a8,8,0,0,0-7.32,0l-80,40A8,8,0,0,0,42.34,96l80,40a8,8,0,0,0,7.32,0l80-40A8,8,0,0,0,213.66,82.34Zm-85.66,38.64L63.31,88l64.69-32.34L192.69,88ZM224,144a8,8,0,0,1-11.55,7.16L128,108.92,43.55,151.16a8,8,0,0,1-7.1-14.32l88-44a8,8,0,0,1,7.1,0l88,44A8,8,0,0,1,224,144Zm0,48a8,8,0,0,1-11.55,7.16L128,156.92,43.55,199.16a8,8,0,0,1-7.1-14.32l88-44a8,8,0,0,1,7.1,0l88,44A8,8,0,0,1,224,192Z"/></svg>
+          <span class="lbl" data-i18n="nav_architect">El Arquitecto</span>
+        </div>
+        <div class="nav-item" data-tab="inspector">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M235.5,216.81c-22.56-11-35.5-34.58-35.5-64.8V134.73a15.94,15.94,0,0,0-10.09-14.87L165,110a8,8,0,0,1-4.48-10.34l21.32-53a28,28,0,0,0-16.1-37,28.14,28.14,0,0,0-35.82,16,.61.61,0,0,0,0,.12L108.9,79a8,8,0,0,1-10.37,4.49L73.11,73.14A15.89,15.89,0,0,0,55.74,76.8C34.68,98.45,24,123.75,24,152a111.45,111.45,0,0,0,31.18,77.53A8,8,0,0,0,61,232H232a8,8,0,0,0,3.5-15.19ZM67.14,88l25.41,10.3a24,24,0,0,0,31.23-13.45l21-53c2.56-6.11,9.47-9.27,15.43-7a12,12,0,0,1,6.88,15.92L145.69,93.76a24,24,0,0,0,13.43,31.14L184,134.73V152c0,.33,0,.66,0,1L55.77,101.71A108.84,108.84,0,0,1,67.14,88Zm48,128a87.53,87.53,0,0,1-24.34-42,8,8,0,0,0-15.49,4,105.16,105.16,0,0,0,18.36,38H64.44A95.54,95.54,0,0,1,40,152a85.9,85.9,0,0,1,7.73-36.29l137.8,55.12c3,18,10.56,33.48,21.89,45.16Z"/></svg>
+          <span class="lbl" data-i18n="nav_inspector">Revisor IA</span>
+        </div>
+        <div class="nav-item" data-tab="ai-config">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.6,107.6,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.29,107.29,0,0,0-26.25-10.86,8,8,0,0,0-7.06,1.48L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.6,107.6,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Z"/></svg>
+          <span class="lbl" data-i18n="nav_config">Ajustes IA</span>
+        </div>
+      </div>
+    </nav>
+    <div class="sidebar-foot">
+      <span class="app-version" id="app-version">v1.0</span>
+    </div>
+  </aside>
+
+  <!-- ─── Columna principal ───────────────────────────── -->
+  <div class="main-col">
+    <header class="topbar" data-tauri-drag-region>
+      <div class="topbar-left">
+        
+        <div class="picker">
+          <button class="picker-btn" id="btn-picker" title="Carpeta de repositorios">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <span class="pk-text" id="picker-current" data-i18n="pk_none">Sin carpeta</span>
+            <span class="pk-chev">▾</span>
+          </button>
+          <div class="picker-menu" id="picker-menu">
+            <div class="pm-label" data-i18n="pk_current">Carpeta de repos actual</div>
+            <div class="pm-path" id="picker-path">—</div>
+            <div class="pm-label" data-i18n="pk_set">Cambiar carpeta (ruta absoluta)</div>
+            <input type="text" id="picker-input" placeholder="C:\\Users\\...\\GitHub" />
+            <div class="pm-row">
+              <button class="cta" id="btn-picker-save" style="flex:1" data-i18n="pk_use">Usar y escanear</button>
+              <button class="cta ghost" id="btn-rescan" data-i18n="pk_rescan">Re-escanear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-btn" id="btn-theme" title="Cambiar tema claro / oscuro" aria-label="Tema"></button>
+        <button class="lang-btn" id="btn-lang" title="Cambiar idioma">ES</button>
+        <a class="icon-btn" id="link-portfolio" href="https://ivanjonasfc.dev" target="_blank" rel="noopener" title="Portfolio">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg>
+        </a>
+        <a class="icon-btn" id="link-github" href="https://github.com/IvanjonasFC" target="_blank" rel="noopener" title="GitHub">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"/></svg>
+        </a>
+      </div>
+
+      <div class="win-controls">
+        <button class="win-btn" id="win-min" title="Minimizar" aria-label="Minimizar">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><line x1="2" y1="6" x2="10" y2="6"/></svg>
+        </button>
+        <button class="win-btn" id="win-max" title="Maximizar" aria-label="Maximizar">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2.5" y="2.5" width="7" height="7" rx="1"/></svg>
+        </button>
+        <button class="win-btn close" id="win-close" title="Cerrar" aria-label="Cerrar">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 3l6 6M9 3l-6 6"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main style="display:flex; flex-direction:row; height:100%; overflow:hidden; position:relative;">
+      <div class="content">
+
+        <!-- Banner de entorno (modo demo en navegador) -->
+        <div id="env-banner" style="display:none; margin-bottom:16px; padding:12px 16px; border:1px solid var(--warn); border-radius:12px; background:var(--warn-soft); font-size:12px; color:var(--fg-2);"></div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="tab-content active">
+          <h1 data-i18n="t_dashboard">Dashboard General</h1>
+          <div class="desc" data-i18n="d_dashboard">Vista global de tus repositorios locales.</div>
+
+          
+          <div class="global-actions" style="margin-top:24px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="cta" id="btn-sync-all" data-i18n="b_sync">Sincronizar Todos</button>
+            <button class="cta" id="btn-secops-all" data-i18n="b_audit">Auditar Todos</button>
+            <button class="cta ghost" id="btn-prune-all" data-i18n="b_scanall">Barrer Todos</button>
+          </div>
+<div class="kpi-dashboard" style="margin-top:24px;">
+            <div class="kpi-card card">
+              <div class="kpi-title" data-i18n="kpi_total">Proyectos detectados</div>
+              <div class="kpi-val" id="kpi-total">--</div>
+            </div>
+            <div class="kpi-card card">
+              <div class="kpi-title" data-i18n="kpi_dirty">Cambios sin subir</div>
+              <div class="kpi-val warn" id="kpi-uncommited">--</div>
+            </div>
+            <div class="kpi-card card">
+              <div class="kpi-title" data-i18n="kpi_env">Estado del entorno</div>
+              <div class="kpi-val good" id="kpi-sync">Listo</div>
+            </div>
+          </div>
+
+          <div class="desc" style="margin-top:28px;" data-i18n="repos_detected">Repositorios detectados</div>
+          <div id="repo-grid" style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">
+            <div class="desc" data-i18n="scanning">Escaneando...</div>
+          </div>
+        </div>
+
+        <!-- El Arquitecto -->
+        <div id="architect" class="tab-content">
+          <h1 data-i18n="t_architect">Inicializar Proyecto</h1>
+          <div class="desc" data-i18n="d_architect">Genera la estructura perfecta (MVC, Hexagonal) y entornos virtuales.</div>
+          <div class="card" style="margin-top:20px;">
+            <div class="field-row">
+              <div class="flabel" data-i18n="f_name">Nombre</div>
+              <div class="field"><input type="text" id="project-name" placeholder="Ej: scraper-python" /></div>
+            </div>
+            <div class="field-row">
+              <div class="flabel" data-i18n="f_template">Plantilla</div>
+              <div class="field"><select id="project-template"><option value="python">Python</option></select></div>
+            </div>
+          </div>
+          <div class="run-row"><button class="cta" id="btn-init" data-i18n="b_build">Construir Arquitectura</button></div>
+
+          <div class="desc" style="margin-top:30px;" data-i18n="tpl_save_title">Guardar un repo como plantilla propia</div>
+          <div class="card" style="margin-top:10px;">
+            <div class="field-row">
+              <div class="flabel" data-i18n="f_repo">Repositorio</div>
+              <div class="field"><select id="tpl-save-repo"><option data-i18n="opt_scan">Escanea primero...</option></select></div>
+            </div>
+            <div class="field-row" style="margin-top:12px;">
+              <div class="flabel" data-i18n="tpl_name">Nombre</div>
+              <div class="field"><input type="text" id="tpl-save-name" placeholder="Ej: base-tauri" /></div>
+            </div>
+          </div>
+          <div class="run-row"><button class="cta ghost" id="btn-tpl-save" data-i18n="b_save_tpl">Guardar como plantilla</button></div>
+          <div class="desc" id="tpl-dir-hint" style="margin-top:10px; font-size:11px; opacity:.8;"></div>
+        </div>
+
+        <!-- Revisor IA -->
+        <div id="inspector" class="tab-content">
+          <div class="head-row">
+            <div>
+              <h1 data-i18n="t_inspector">Revisor IA</h1>
+              <div class="desc" data-i18n="d_inspector">Usa Ollama o tu IA preferida para analizar tu último commit (Code Smells, bugs, seguridad).</div>
+            </div>
+            <button class="cta warn" id="btn-inspect" data-i18n="b_inspect">Auditar Commit</button>
+          </div>
+          <div id="ollama-status" class="ai-banner ai-banner--wait" style="margin-top:16px;">
+            <span class="ai-dot"></span>
+            <span id="ollama-status-text" data-i18n="ollama_check">Comprobando si Ollama está encendido…</span>
+            <button class="cta ghost ai-retry" id="btn-ollama-retry" data-i18n="b_retry">Reintentar</button>
+          </div>
+          <div class="card" style="margin-top:16px;">
+            <div class="field-row">
+              <div class="flabel" data-i18n="f_repo">Repositorio</div>
+              <div class="field"><select id="ai-repo-select"><option data-i18n="opt_scan">Escanea primero...</option></select></div>
+            </div>
+          </div>
+          <div id="ai-review-results" class="card" style="margin-top:24px; white-space:pre-wrap; font-family:var(--font-mono); font-size:12.5px; display:none; max-height:420px; overflow-y:auto;"></div>
+        </div>
+
+        <!-- Ajustes IA -->
+        <div id="ai-config" class="tab-content">
+          <h1 data-i18n="t_config">Ajustes de IA</h1>
+          <div class="desc" data-i18n="d_config">Configura el motor de IA para el Revisor. Recomendamos Ollama en local (privado y gratis).</div>
+          <div class="card" style="margin-top:20px;">
+            <div class="field-row">
+              <div class="flabel" data-i18n="f_provider">Proveedor</div>
+              <div class="field">
+                <select id="ai-provider">
+                  <option value="ollama">Ollama (Local / Free)</option>
+                  <option value="openai">OpenAI (API Key)</option>
+                  <option value="anthropic">Anthropic (API Key)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-top:12px;">
+            <div class="field-row">
+              <div class="flabel" data-i18n="f_endpoint">Endpoint</div>
+              <div class="field"><input type="text" id="ai-endpoint" value="http://localhost:11434/api/generate" /></div>
+            </div>
+            <div class="field-row" style="margin-top:12px;">
+              <div class="flabel" data-i18n="f_model">Modelo</div>
+              <div class="field"><input type="text" id="ai-model" value="llama3" /></div>
+            </div>
+            <div class="field-row" style="margin-top:12px;">
+              <div class="flabel">API Key</div>
+              <div class="field"><input type="password" id="ai-key" data-i18n-ph="ph_key" placeholder="Solo para OpenAI/Anthropic..." /></div>
+            </div>
+          </div>
+          <div id="ai-config-status" class="ai-banner ai-banner--wait" style="margin-top:16px;">
+            <span class="ai-dot"></span>
+            <span id="ai-config-status-text" data-i18n="ollama_idle">Pulsa "Probar conexión" para comprobar tu motor de IA.</span>
+          </div>
+          <div class="run-row" style="display:flex; gap:10px;">
+            <button class="cta ghost" id="btn-test-ai" data-i18n="b_test">Probar conexión</button>
+            <button class="cta" id="btn-save-ai" data-i18n="b_save">Guardar Configuración</button>
+          </div>
+        </div>
+
+
+
+      
+      </div> <!-- End of content -->
+
+      <!-- Panel lateral de detalle por repo -->
+      <div class="side-panel" id="repo-detail-panel">
+        <div class="sp-header">
+           <h3 id="sp-repo-name">RepoName</h3>
+           <button class="icon-btn" id="btn-close-sp" title="Cerrar Panel"><svg viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg></button>
+        </div>
+        <div class="sp-tabs">
+           <div class="sp-tab active" data-sptab="sp-resumen">Resumen</div>
+           <div class="sp-tab" data-sptab="sp-git">Git</div>
+           <div class="sp-tab" data-sptab="sp-seguridad">Seguridad</div>
+           <div class="sp-tab" data-sptab="sp-cicd">CI/CD</div>
+        </div>
+        <div class="sp-content">
+           <div id="sp-resumen" class="sp-tab-content active">
+               <div id="sp-resumen-container"></div>
+           </div>
+           <div id="sp-git" class="sp-tab-content">
+               <h4 style="margin-bottom:12px;">Acciones Git</h4>
+               <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+                   <button class="cta" id="btn-sp-git-sync">Sincronizar (Fast-Forward)</button>
+                   <button class="cta ghost" id="btn-sp-git-clean">Limpiar ramas muertas</button>
+               </div>
+               <h4 style="margin-bottom:12px;">Historial Reflog</h4>
+               <button class="cta ghost" style="margin-bottom:12px;" id="btn-sp-reflog">Cargar Reflog</button>
+               <div id="sp-reflog-results" style="display:flex; flex-direction:column; gap:8px;"></div>
+           </div>
+           <div id="sp-seguridad" class="sp-tab-content">
+               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                   <h4 style="margin:0;">Auditoría de Dependencias</h4>
+                   <button class="cta" id="btn-sp-secops-audit">Auditar (Rápido)</button>
+               </div>
+               <div id="sp-secops-results" style="margin-bottom:24px;"></div>
+               
+               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-top:1px solid var(--hairline); padding-top:16px;">
+                   <h4 style="margin:0;">Análisis Profundo</h4>
+                   <button class="cta warn" id="btn-sp-secops-deep">Escaneo Profundo</button>
+               </div>
+               <div class="desc" style="margin-bottom:12px;">Gitleaks, Trivy, OSV, Semgrep. Puede tardar más tiempo.</div>
+               <div id="sp-deep-results"></div>
+           </div>
+           <div id="sp-cicd" class="sp-tab-content">
+               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                   <h4 style="margin:0;">CI/CD Autopiloto</h4>
+                   <button class="cta" id="btn-sp-cicd-detect">Detectar Stack</button>
+               </div>
+               <div id="sp-cicd-results"></div>
+           </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Consola: barra inferior acoplada -->
+    <div class="term collapsed" id="console-drawer">
+      <div class="term-head" id="console-toggle">
+        <svg class="term-ico" viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM104,120a8,8,0,0,1-2.34,5.66l-24,24a8,8,0,0,1-11.32-11.32L86.69,120,66.34,99.66a8,8,0,0,1,11.32-11.32l24,24A8,8,0,0,1,104,120Zm72,32a8,8,0,0,1-8,8H136a8,8,0,0,1,0-16h32A8,8,0,0,1,176,152Z"/></svg>
+        <span class="term-title" data-i18n="term_title">Consola</span>
+        <span class="term-caret">▾</span>
+      </div>
+      <div class="term-body" id="logs">
+        <span style="color:var(--good)" data-i18n="boot">Sistema en línea. Esperando órdenes...</span><br/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resize handles (frameless) -->
+  <div class="rz rz-t" data-rz="North"></div>
+  <div class="rz rz-b" data-rz="South"></div>
+  <div class="rz rz-l" data-rz="West"></div>
+  <div class="rz rz-r" data-rz="East"></div>
+  <div class="rz rz-tl" data-rz="NorthWest"></div>
+  <div class="rz rz-tr" data-rz="NorthEast"></div>
+  <div class="rz rz-bl" data-rz="SouthWest"></div>
+  <div class="rz rz-br" data-rz="SouthEast"></div>
+</div>
+
+<script type="module" src="/main.js"></script>
+<script>
+  // Halo que sigue el ratón (mismo patrón que SubsForge): transform en GPU, 1 frame por rAF.
+  const blob = document.getElementById('blob');
+  let _bx = innerWidth * 0.6, _by = innerHeight * 0.4, _bq = false;
+  function paintBlob() {
+    _bq = false;
+    if (blob) blob.style.transform = `translate3d(${_bx}px,${_by}px,0) translate(-50%,-50%)`;
+  }
+  window.addEventListener('pointermove', (e) => {
+    _bx = e.clientX; _by = e.clientY;
+    if (!_bq) { _bq = true; requestAnimationFrame(paintBlob); }
+  }, { passive: true });
+  paintBlob();
+</script>
+</body>
+</html>
+
+
+
+
+
+
