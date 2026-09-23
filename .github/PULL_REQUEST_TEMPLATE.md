@@ -1,20 +1,17 @@
-<!-- Thanks for contributing to OrquestaGit! -->
+## Descripción
 
-## What does this PR do?
+<!-- ¿Qué cambia este PR y por qué? -->
 
-<!-- A short description of the change and its motivation. Link any issue: Closes #123 -->
+## Tipo de cambio
 
-## Type
-
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Style / UI
-- [ ] Refactor / chore
-- [ ] Docs
+- [ ] 🐛 Corrección de fallo
+- [ ] ✨ Nueva funcionalidad
+- [ ] 🎨 Estilo / UI
+- [ ] ♻️ Refactor
+- [ ] 📝 Documentación
 
 ## Checklist
 
-- [ ] The project builds (`npm run tauri build`).
-- [ ] No secrets included (`.env`, keys, tokens).
-- [ ] Commits follow Conventional Commits.
-- [ ] Any new engine action keeps the single-JSON-line contract.
+- [ ] El proyecto compila (`npm run tauri build`).
+- [ ] No incluyo secretos (`.env`, claves, tokens).
+- [ ] Sigo Conventional Commits.

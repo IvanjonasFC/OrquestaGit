@@ -1,22 +1,21 @@
 # Changelog
 
-All notable changes to OrquestaGit are documented here. This project adheres to
-[Semantic Versioning](https://semver.org/) and
-[Keep a Changelog](https://keepachangelog.com/).
+Todas las novedades relevantes de este proyecto se documentan aquí.
+El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/)
+y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
 ### Added
-- Unified "Forge" design system (portable `brand.css`): light/dark tokens, a
-  pressable 3D button, a glass top bar and dot-matrix utilities.
-- Control Center: repository detection, per-repo state and a live console drawer.
-- Per-repo detail side panel (Summary / Git / Security / CI-CD).
+- Sistema de diseño unificado "Forge" (brand.css portable): tokens claro/oscuro,
+  botón 3D pulsable, barra glass y utilidades de matriz de puntos.
+- Panel de control con detección de repos, estado por repo y consola en vivo.
+- Panel lateral de detalle por repo (Resumen / Git / Seguridad / CI/CD).
 
 ### Changed
-- Redesigned light theme with a warm pastel palette.
-- Solid-fill status pills; background grid aligned to the viewport.
+- Tema claro rediseñado con una paleta pastel cálida.
+- Pills de estado con relleno sólido; rejilla de fondo alineada al viewport.
 
 ## [0.1.0] - 2026-09-01
-
 ### Added
-- Initial release: Tauri 2 skeleton, Python sidecar and base UI.
+- Versión inicial: esqueleto Tauri 2 + sidecar Python + interfaz base.

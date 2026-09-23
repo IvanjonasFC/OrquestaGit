@@ -1,80 +1,66 @@
-# SecOps engine — OrquestaGit
+# 🛡️ Motor SecOps real — OrquestaGit
 
-A standalone security backend (it does not touch `orquesta_core.py` or the
-frontend). It orchestrates well-known DevSecOps tools and normalizes their output
-into a single report.
+Backend nuevo y **autónomo** (no toca `orquesta_core.py` ni el frontend). Orquesta
+herramientas DevSecOps reconocidas y las normaliza a un informe único.
 
-## What it covers (beyond `npm audit`)
+## Qué cubre (lo que `npm audit` no ve)
+| Escáner | Detecta | Severidad |
+|---------|---------|-----------|
+| **Gitleaks** | Secretos/credenciales filtradas (incl. historial git) | CRITICAL |
+| **Trivy** | CVEs en deps (todos los ecosistemas), secretos, IaC/Docker | según CVE |
+| **osv-scanner** | CVEs en lockfiles (npm, pip, Go, Maven…) | según OSV |
+| **Semgrep** | SAST: bugs/vulns en TU código (SQLi, XSS, cmd inject) | ERROR→HIGH |
 
-| Scanner | Detects | Severity |
-|---------|---------|----------|
-| **Gitleaks** | Leaked secrets / credentials (including git history) | CRITICAL |
-| **Trivy** | CVEs in dependencies (all ecosystems), secrets, IaC / Docker | per CVE |
-| **osv-scanner** | CVEs in lockfiles (npm, pip, Go, Maven…) | per OSV |
-| **Semgrep** | SAST: bugs / vulnerabilities in your own code (SQLi, XSS, command injection) | ERROR to HIGH |
+Detección automática: corre solo lo instalado y degrada con guía de instalación.
+Réplica ~80-90% de GitHub Advanced Security (49 $/dev/mes) gratis.
 
-Auto-detection: it runs only the tools installed and degrades gracefully with
-installation hints. It replicates roughly 80–90% of GitHub Advanced Security for
-free.
-
-## Files
-
-- `src/core/secops_engine.py` — standalone CLI.
+## Archivos
+- `src/core/secops_engine.py` — CLI independiente.
 - `src/core/scanners/` — `base.py`, `logutil.py`, `engine.py`, `gitleaks.py`, `trivy.py`, `osv.py`, `semgrep.py`.
-- Rotating log: `~/.orquestagit/logs/secops.log` (never to stdout).
+- Log rotativo: `~/.orquestagit/logs/secops.log` (nunca a stdout).
 
-## CLI (prints ONE JSON line)
-
+## CLI (imprime UNA línea JSON)
 ```
-python src/core/secops_engine.py doctor                      # what is installed + how to install
-python src/core/secops_engine.py deep_scan <repo> [g,t,...]  # deep scan of one repo
-python src/core/secops_engine.py deep_scan_all <root>        # every repo under a folder
-python src/core/secops_engine.py explain "<title>" "<detail>" [endpoint] [model]  # Ollama
+python src/core/secops_engine.py doctor                      # qué hay instalado + cómo instalar
+python src/core/secops_engine.py deep_scan <repo> [g,t,...]  # escaneo profundo de un repo
+python src/core/secops_engine.py deep_scan_all <raíz>        # todos los repos de la carpeta
+python src/core/secops_engine.py explain "<título>" "<detalle>" [endpoint] [model]  # Ollama
 ```
 
-## Report contract (`deep_scan`)
-
+## Contrato del informe (`deep_scan`)
 ```json
 { "ok": true, "repo": "...", "path": "...", "scanned_at": "...", "duration_s": 1.2,
-  "tools": { "gitleaks": "8.18", "trivy": null },
+  "tools": { "gitleaks": "8.18", "trivy": null, ... },
   "summary": { "critical": 2, "high": 0, "medium": 0, "low": 0, "total": 2 },
   "gate": { "threshold": "high", "passed": false },
-  "findings": [ { "scanner", "severity", "title", "detail", "file", "line", "rule", "remediation" } ],
-  "missing_tools": [ { "name": "trivy", "install": "..." } ],
+  "findings": [ { "scanner","severity","title","detail","file","line","rule","remediation" } ],
+  "missing_tools": [ { "name":"trivy", "install":"..." } ],
   "errors": [] }
 ```
+`findings` viene ordenado de más grave a menos. `gate.passed=false` si hay algo ≥ `threshold`.
 
-`findings` is ordered from most to least severe. `gate.passed` is `false` if
-anything is at or above `threshold`.
-
-## Frontend integration (without touching the core)
-
-The frontend invokes it **exactly like `orquesta_core.py`**, as a second script:
-
+## Integración (para Antigravity — SIN tocar el core)
+El frontend lo invoca **igual que a `orquesta_core.py`**, como un segundo script:
 ```js
 const out = await Command.create(PYBIN, [SCRIPT_SECOPS, 'deep_scan_all', ROOT]).execute();
-// SCRIPT_SECOPS = <root>/src/core/secops_engine.py
+// SCRIPT_SECOPS = <root>/src/core/secops_engine.py  (usa app_paths igual que el core)
 ```
+Render sugerido en el Auditor SecOps:
+- Cabecera por repo: nombre + badges `summary` (2 CRIT / 1 HIGH…) + chip del `gate` (verde PASA / rojo FALLA).
+- Al desplegar: lista de `findings` (severidad · scanner · título · `file:line` · remediation).
+- Si `missing_tools` no está vacío: tarjeta "Instala para cubrir más" con los comandos.
+- Botón "Explicar" por finding → acción `explain` (Ollama) para el texto en lenguaje simple.
 
-Suggested rendering in the SecOps auditor:
+*(Alternativa: añadir en `orquesta_core.py` una acción `secops_deep` que haga passthrough al engine. Pero no es necesario: llamarlo directo evita todo acoplamiento.)*
 
-- Per-repo header: name + `summary` badges (2 CRIT / 1 HIGH…) + a `gate` chip (green PASS / red FAIL).
-- On expand: the list of `findings` (severity · scanner · title · `file:line` · remediation).
-- If `missing_tools` is non-empty: an "Install to cover more" card with the commands.
-- An "Explain" button per finding calls the `explain` action (Ollama) for plain-language text.
-
-## Installing the scanners (Windows)
-
+## Instalar los escáneres (Windows)
 ```
-scoop install gitleaks trivy        # or binaries from their GitHub Releases
-pip install semgrep                 # SAST (limited Windows support -> WSL / Docker)
-# osv-scanner: binary from github.com/google/osv-scanner/releases
+scoop install gitleaks trivy        # o binarios de sus GitHub Releases
+pip install semgrep                 # SAST (soporte Win limitado → WSL/Docker)
+# osv-scanner: binario de github.com/google/osv-scanner/releases
 ```
-
-Start with **Gitleaks**: highest value (secrets), zero configuration.
+Empieza por **Gitleaks**: máximo valor (secretos), cero configuración.
 
 ## Quality gate
-
-By default it fails at severity >= HIGH. Change `gate_threshold` in
-`engine.deep_scan()` or pass it from a future UI setting. Use it as a customs
-checkpoint before `push`.
+Por defecto falla con severidad ≥ HIGH. Cambia `gate_threshold` en `engine.deep_scan()`
+o pásalo desde un futuro ajuste de UI. Úsalo como aduana antes de `push`.

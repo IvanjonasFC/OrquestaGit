@@ -1,34 +1,30 @@
-# Code of Conduct
+# Código de Conducta
 
-## Our pledge
+## Nuestro compromiso
 
-We as members, contributors, and maintainers pledge to make participation in the
-OrquestaGit community a harassment-free experience for everyone, regardless of
-age, body size, disability, ethnicity, gender identity and expression, level of
-experience, nationality, personal appearance, race, religion, or sexual identity
-and orientation.
+Como participantes y responsables de este proyecto, nos comprometemos a hacer
+de la participación una experiencia libre de acoso para todo el mundo, con
+independencia de edad, identidad y expresión de género, nivel de experiencia,
+nacionalidad, apariencia, raza, religión u orientación sexual.
 
-## Our standards
+## Nuestras normas
 
-Examples of behavior that contributes to a positive environment:
+Ejemplos de comportamiento que contribuye a un entorno positivo:
 
-- Using welcoming and inclusive language.
-- Being respectful of differing viewpoints and experiences.
-- Giving and gracefully accepting constructive feedback.
+- Usar un lenguaje acogedor e inclusivo.
+- Respetar los distintos puntos de vista y experiencias.
+- Aceptar con criterio la crítica constructiva.
 
-Examples of unacceptable behavior:
+Ejemplos de comportamiento inaceptable:
 
-- Insulting or derogatory comments, and personal or political attacks.
-- Public or private harassment.
-- Publishing others' private information without explicit permission.
+- Comentarios ofensivos, insultos o ataques personales.
+- Acoso público o privado.
+- Publicar información privada de terceros sin permiso.
 
-## Enforcement
+## Aplicación
 
-Instances of abusive or unacceptable behavior may be reported by opening a
-private issue or contacting the maintainers. All complaints will be reviewed and
-investigated promptly and fairly.
+Los casos de comportamiento abusivo pueden notificarse abriendo una incidencia
+privada o contactando con los responsables del proyecto. Todas las quejas se
+revisarán e investigarán de forma justa.
 
-## Attribution
-
-This Code of Conduct is adapted from the
-[Contributor Covenant](https://www.contributor-covenant.org/), version 2.1.
+Este Código de Conducta se adapta del [Contributor Covenant](https://www.contributor-covenant.org), versión 2.1.

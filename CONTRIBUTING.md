@@ -1,43 +1,35 @@
-# Contributing to OrquestaGit
+# Contribuir a OrquestaGit
 
-Thanks for your interest! These notes help you contribute effectively.
+¡Gracias por tu interés en OrquestaGit! Estas notas te ayudan a contribuir de
+forma efectiva.
 
-## Development requirements
+## Requisitos de desarrollo
 
-- Node.js 18+ and npm
-- Rust (stable) and the [Tauri 2](https://tauri.app) toolchain
-- Python 3.10+ (the AI / orchestration sidecar)
-- (Optional) [Ollama](https://ollama.com) for the local AI engine
+- Node.js 18+ y npm
+- Rust (estable) + toolchain de [Tauri 2](https://tauri.app)
+- Python 3.10+ (sidecar de IA/orquestación)
+- (Opcional) [Ollama](https://ollama.com) para el motor de IA local
 
-## Getting started
+## Puesta en marcha
 
 ```bash
 npm install
-npm run tauri dev     # development, hot reload
-npm run tauri build   # production binaries
+npm run tauri dev     # desarrollo con recarga en caliente
+npm run tauri build   # binarios de producción
 ```
 
-Run the app with `npm run tauri dev`, **not** `npm run dev`: the latter opens
-the plain browser, where Tauri's `invoke` bridge is unavailable.
+## Estilo de commits
 
-## Commit style
-
-We follow [Conventional Commits](https://www.conventionalcommits.org):
+Seguimos [Conventional Commits](https://www.conventionalcommits.org):
 `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `style:`, `test:`.
 
-## The orchestration contract
+## Antes de abrir un Pull Request
 
-The Python engine prints a **single JSON line** per action and never crashes the
-output (everything is wrapped in `try/except`). If you add an action, keep this
-contract and document it in the relevant spec.
+1. Asegúrate de que el proyecto compila (`npm run tauri build`).
+2. No subas secretos: `.env`, claves o tokens quedan fuera (ver `.gitignore`).
+3. Describe el cambio y el motivo en la descripción del PR.
 
-## Before you open a pull request
+## Reporte de fallos
 
-1. Make sure the project builds (`npm run tauri build`).
-2. Do not commit secrets: `.env`, keys and tokens stay out (see `.gitignore`).
-3. Describe the change and its motivation in the pull request description.
-
-## Reporting bugs
-
-Open an issue with steps to reproduce, your operating system, and the console
-log if relevant.
+Abre una incidencia con los pasos para reproducir, el sistema operativo y,
+si aplica, el log de la consola.

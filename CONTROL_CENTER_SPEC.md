@@ -1,68 +1,56 @@
-# OrquestaGit — Control Center specification (RepoBar layout)
+# 🎛️ OrquestaGit — Spec del "Control Center" (layout RepoBar)
 
-UI/UX design spec for the Control Center. Styles are based on the shared
-`brand.css` design system.
+> Para **Antigravity** (dueño del frontend). Maqueta visual interactiva de referencia: el artifact "OrquestaGit Control Center" que hizo Claude (pídesela a Iván). Usa `brand.css` como base de estilos.
 
-## Principle
+## Principio
+Una sola superficie que **abre con datos de caché** (no vacía) y refresca en 2º plano. El usuario ve estado y actúa; los logs quedan en un cajón plegable, no protagonista.
 
-A single surface that **opens with cached data** (never empty) and refreshes in
-the background. The user sees state and acts; logs live in a collapsible drawer,
-not center stage.
+## 4 niveles
+1. **Dashboard global** — franja de contexto + KPIs accionables + alertas.
+2. **Lista de repos** — cada repo = una fila con columnas fijas.
+3. **Detalle por repo** — panel lateral derecho con pestañas (Resumen · Git · Seguridad · CI/CD).
+4. **Herramientas** — Arquitecto, limpieza masiva… solo al actuar.
 
-## Four levels
+## Franja de contexto (top)
+`[carpeta activa ▾] · [motor local ● actualizado hace 2 min] · ......... · [buscar] [refrescar todo]`
+Muestra frescura del dato ("fetch hace 30 s", "leyendo caché"): sube mucho la percepción de calidad.
 
-1. **Global dashboard** — context strip, actionable KPIs, alerts.
-2. **Repository list** — each repo is one row with fixed columns.
-3. **Per-repo detail** — right-hand side panel with tabs (Summary, Git, Security, CI/CD).
-4. **Tools** — Architect, bulk cleanup, and so on; shown only when acting.
+## KPIs accionables (no decorativos) — cada uno filtra la lista al pulsarlo
+Repos · Vuln. altas · CI fallando · Sin subir · Ramas muertas · Sin upstream.
 
-## Context strip (top)
+## Fila de repo (columnas fijas)
+| Zona | Contenido |
+|------|-----------|
+| Izquierda | Nombre · stack detectado · ruta corta |
+| Git | rama · último commit · ahead/behind · dirty files |
+| Estado | chips: `limpio` `CI ✕` `sin upstream` `N vuln` `↓N` `↑N` |
+| Acciones | abrir carpeta · abrir en GitHub · auditar · limpiar · sync |
 
-`[active folder v] · [local engine ● updated 2 min ago] · ......... · [search] [refresh all]`
+Fila clicable → abre el panel de detalle (nivel 3).
 
-Showing data freshness ("fetched 30s ago", "reading cache") noticeably raises the
-perceived quality of the app.
+## Panel de detalle (derecha, colapsable)
+Pestañas cortas: **Resumen · Git · Seguridad · CI/CD**.
+- Resumen: salud, seguridad, git, último escaneo + acción recomendada.
+- Seguridad: findings ordenados por gravedad (severidad · paquete+rango · aviso · versión que corrige) + comando de arreglo copiable + botón "Arreglar" **con confirmación**.
+- Git: rama, ahead/behind, dirty, sync fast-forward seguro, reflog.
+- CI/CD: último workflow, estado, logs, generar workflow.
 
-## Actionable KPIs
+## Reglas de diseño (críticas)
+- **Color = estado, nunca decoración**: verde=limpio, ámbar=aviso, rojo=problema, gris=sin configurar.
+- **Chips idénticos en toda la app**: "sin upstream" se ve igual en Dashboard, Radar y Auditor.
+- **Nunca consola vacía por defecto**: si no hay datos, tarjeta "último análisis no disponible" + acción.
+- **Consola** = drawer inferior plegable, solo para depurar.
 
-Each KPI filters the list when clicked; none are decorative:
-Repos · High vulnerabilities · CI failing · Unpushed · Dead branches · No upstream.
+## Automatización segura (no humo)
+- Auto-fetch: todos, cada X min.
+- Auto-pull: SOLO si limpio + fast-forward posible.
+- Auto-auditoría: al abrir y al detectar commit nuevo.
+- Limpieza / fix: sugerir → confirmar. Nunca destructivo en silencio.
 
-## Repository row (fixed columns)
+## Consolidar a 6 módulos
+Repositorios (estado) · Seguridad · CI/CD · Higiene · Git local · Arquitecto — todos alimentando el mismo dashboard.
 
-| Zone | Content |
-|------|---------|
-| Left | Name · detected stack · short path |
-| Git | Branch · last commit · ahead/behind · dirty files |
-| State | Chips: `clean` `CI failed` `no upstream` `N vulns` `down N` `up N` |
-| Actions | Open folder · open on GitHub · audit · clean · sync |
-
-Clicking a row opens the detail panel (level 3).
-
-## Detail panel (right, collapsible)
-
-Short tabs: **Summary · Git · Security · CI/CD**.
-
-- **Summary**: health, security, git, last scan, and a recommended action.
-- **Security**: findings ordered by severity (severity · package + range · advisory · fixing version), a copyable fix command, and a "Fix" button **with confirmation**.
-- **Git**: branch, ahead/behind, dirty, safe fast-forward sync, reflog.
-- **CI/CD**: last workflow, status, logs, generate workflow.
-
-## Design rules (critical)
-
-- **Color means state, never decoration**: green = clean, amber = warning, red = problem, gray = not configured.
-- **Chips are identical across the app**: "no upstream" looks the same in the Dashboard, the radar and the auditor.
-- **Never an empty console by default**: with no data, show a "last scan unavailable" card plus an action.
-- **The console** is a collapsible bottom drawer, for debugging only.
-
-## Safe automation (no smoke and mirrors)
-
-- Auto-fetch: all repos, every N minutes.
-- Auto-pull: only when clean **and** a fast-forward is possible.
-- Auto-audit: on open and when a new commit is detected.
-- Cleanup / fix: suggest, then confirm. Never silently destructive.
-
-## Consolidated to six modules
-
-Repositories (state) · Security · CI/CD · Hygiene · Local Git · Architect —
-all feeding the same dashboard.
+## Reparto
+- **Frontend (este layout)**: Antigravity — `index.html`, `style.css`, `main.js`.
+- **Backend / lógica / motor SecOps**: Claude, si Iván lo pide (contrato JSON en el worklog).
+- Base de estilos: `brand.css` / `brand.js` (kit de marca ya extraído).

@@ -1,26 +1,27 @@
-# Security Policy
+# Política de Seguridad
 
-## Supported versions
+## Versiones soportadas
 
-Security fixes are provided for the latest released version of OrquestaGit.
+Se da soporte de seguridad a la última versión publicada de OrquestaGit.
 
-## Reporting a vulnerability
+## Reportar una vulnerabilidad
 
-**Please do not open a public issue for security problems.** Report them
-privately through GitHub's **Security tab → "Report a vulnerability"** on this
-repository, or by contacting the maintainer directly.
+Si encuentras una vulnerabilidad, **no abras una incidencia pública**. Repórtala
+de forma privada a través de los canales de seguridad de GitHub (pestaña
+"Security" → "Report a vulnerability") o contactando directamente con el
+mantenedor.
 
-Please include, where possible:
+Incluye, si es posible:
 
-- A description of the issue and its impact.
-- Steps to reproduce.
-- The affected version and your operating system.
+- Descripción del problema y su impacto.
+- Pasos para reproducirlo.
+- Versión afectada y sistema operativo.
 
-We aim to review reports promptly and keep you informed of progress.
+Nos comprometemos a revisar el reporte con la mayor brevedad y a mantenerte
+informado del progreso.
 
-## Data and privacy
+## Nota sobre datos y privacidad
 
-OrquestaGit is designed to run locally. The default AI engine is **Ollama
-(local)**; cloud APIs are optional, require a user-supplied key, and that key is
-never stored in the repository. OrquestaGit reads your repositories to report
-their state and never transmits source code when running in local mode.
+OrquestaGit está diseñado para funcionar en local. El motor de IA por defecto
+es **Ollama (local)**; el uso de APIs cloud es opcional y requiere que el
+usuario aporte su propia clave, que nunca se almacena en el repositorio.
